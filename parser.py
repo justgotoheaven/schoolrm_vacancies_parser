@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 from config import SELECT_CITY_LINK, CITY_ID
-import csv
 
 
 class Parser():
@@ -11,7 +10,6 @@ class Parser():
         self.__select_link = SELECT_CITY_LINK
         self.session = requests.Session()
         self.soup = None
-        self.__data_headers = ['Школа', 'Адрес', 'Телефон', 'Вакансии']
         self.__vacancy_url = 'https://{}/sveden/employees/jobs/'
 
     def get_schools_dict(self):
