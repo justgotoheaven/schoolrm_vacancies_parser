@@ -56,7 +56,7 @@ class Parser:
         return vacancies
 
     def parse_vacancies(self):
-        with open('vacancies.txt', 'w') as file:
+        with open(self.__filename, 'w') as file:
             schools = self.get_schools_dict()
             schools_list = schools.keys()
             for s in schools_list:
