@@ -3,14 +3,18 @@ import requests
 from config import SELECT_CITY_LINK, CITY_ID
 
 
-class Parser():
+class Parser:
 
-    def __init__(self):
+    def __init__(self, filename='vacancies.txt'):
         self.__city = CITY_ID
         self.__select_link = SELECT_CITY_LINK
         self.session = requests.Session()
         self.soup = None
         self.__vacancy_url = 'https://{}/sveden/employees/jobs/'
+        self.__filename = filename
+
+    def get_filename(self):
+        return self.__filename
 
     def get_schools_dict(self):
         data = dict(id=self.__city)
@@ -32,7 +36,7 @@ class Parser():
         data.append(school_name_pretty)
         school_adr_and_phone = self.soup.find('div', class_='address_block')
         school_adr_pretty = school_adr_and_phone.text.strip().split('Телефон')[0]. \
-            replace('            			                                        ', '').replace('Адрес:','')
+            replace('            			                                        ', '').replace('Адрес:', '')
         data.append(school_adr_pretty)
         school_phone = school_adr_and_phone.text.split('Телефон:')[1].split('Контакты')[0].strip()
         data.append(school_phone)
